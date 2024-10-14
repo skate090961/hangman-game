@@ -1,13 +1,13 @@
 import type { Config } from 'tailwindcss'
 
 export default {
-  content: [
+    darkMode: 'selector',
+    content: [
       './index.html',
       './src/scripts/**/*.{js,ts}'
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
+    ],
+    theme: {
+        extend: {},
+    },
+    plugins: [],
 } satisfies Config
-

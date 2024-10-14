@@ -26,3 +26,34 @@
         font-family: "Akzidenz", system-ui, sans-serif;
     }
 }
+
+@layer components {
+    #app {
+        @apply h-screen flex flex-col justify-center items-center dark:text-white dark:bg-zinc-800;
+    }
+
+    #game {
+        @apply mt-10 flex-col items-center font-bold;
+    }
+
+    .logo {
+        @apply text-2xl sm:text-4xl md:text-5xl font-bold;
+    }
+
+    .button-primary {
+        @apply transition ease-in-out delay-100 bg-slate-200 dark:bg-indigo-500 dark:hover:bg-indigo-600
+        hover:bg-slate-300 rounded-md px-5 py-2;
+    }
+
+    .toggle_container {
+        @apply absolute top-6 right-6;
+    }
+
+    .toggle_span {
+        @apply ms-3 text-sm font-medium text-gray-900 dark:text-gray-300;
+    }
+
+    .toggle_label {
+        @apply inline-flex items-center cursor-pointer;
+    }
+}
