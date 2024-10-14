@@ -1,3 +1,5 @@
+type Modes = 'dark' | 'light';
+
 export const darkModeHandle = () => {
     const darkModeSwitcher = document.getElementById('toggleDarkMode') as HTMLInputElement;
     const htmlElement = document.documentElement;
@@ -5,7 +7,7 @@ export const darkModeHandle = () => {
     const modes = {
         DARK: 'dark',
         LIGHT: 'light'
-    };
+    } as const;
 
     const setInitialMode = () => {
         const mode = localStorage.getItem(modeKey);
@@ -15,7 +17,7 @@ export const darkModeHandle = () => {
         }
     };
 
-    const updateModeInLS = (mode: typeof modes.DARK | typeof modes.LIGHT) => {
+    const updateModeInLS = (mode: Modes) => {
         localStorage.setItem(modeKey, mode);
     };
 
