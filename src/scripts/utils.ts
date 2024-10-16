@@ -1,29 +1,28 @@
-type Modes = 'dark' | 'light';
+enum Modes {
+    DARK = 'dark',
+    LIGHT = 'light'
+}
 
 export const darkModeHandle = () => {
     const darkModeSwitcher = document.getElementById('toggleDarkMode') as HTMLInputElement;
     const htmlElement = document.documentElement;
-    const modeKey = 'mode';
-    const modes = {
-        DARK: 'dark',
-        LIGHT: 'light'
-    } as const;
+    const MODE_KEY = 'mode';
 
     const setInitialMode = () => {
-        const mode = localStorage.getItem(modeKey);
-        if (mode === modes.DARK) {
-            htmlElement.classList.add(modes.DARK);
+        const mode = localStorage.getItem(MODE_KEY);
+        if (mode === Modes.DARK) {
+            htmlElement.classList.add(Modes.DARK);
             darkModeSwitcher.checked = true;
         }
     };
 
     const updateModeInLS = (mode: Modes) => {
-        localStorage.setItem(modeKey, mode);
+        localStorage.setItem(MODE_KEY, mode);
     };
 
     const toggleDarkMode = () => {
-        const isDarkMode = htmlElement.classList.toggle(modes.DARK);
-        updateModeInLS(isDarkMode ? modes.DARK : modes.LIGHT);
+        const isDarkMode = htmlElement.classList.toggle(Modes.DARK);
+        updateModeInLS(isDarkMode ? Modes.DARK : Modes.LIGHT);
     };
 
     setInitialMode();

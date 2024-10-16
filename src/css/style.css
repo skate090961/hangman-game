@@ -41,8 +41,8 @@
     }
 
     .button-primary {
-        @apply transition ease-in-out delay-100 bg-slate-200 dark:bg-indigo-500 dark:hover:bg-indigo-600
-        hover:bg-slate-300 rounded-md px-5 py-2;
+        @apply bg-slate-200 dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:active:bg-indigo-700
+        hover:bg-slate-300 active:bg-slate-400 rounded-md px-5 py-2;
     }
 
     .toggle_container {
@@ -55,5 +55,21 @@
 
     .toggle_label {
         @apply inline-flex items-center cursor-pointer;
+    }
+
+    .placeholders_container {
+        @apply flex flex-row justify-center;
+    }
+
+    .letter {
+        @apply mx-2 text-5xl font-medium;
+    }
+
+    .keyboard {
+        @apply max-w-screen-2xl mt-5 flex justify-center flex-wrap;
+    }
+
+    .keyboard-button {
+        @apply w-10 h-10 sm:w-14 sm:h-14 m-1 sm:m-2;
     }
 }
