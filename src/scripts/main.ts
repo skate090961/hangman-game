@@ -1,6 +1,6 @@
 import '../css/style.css';
-import { darkModeHandle } from './utils.ts';
-import { startGame } from './game.ts';
+import { darkModeHandle } from './darkMode/darkMode.ts';
+import { startGame } from './game/game.ts';
 
 darkModeHandle();
 
