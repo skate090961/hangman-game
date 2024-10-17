@@ -1,10 +1,17 @@
 import { KEYBOARD_LETTERS, WORDS } from './consts.ts';
 
+enum GameStatus {
+  WIN = 'win',
+  LOSE = 'lose',
+  QUIT = 'quit',
+}
+
 const gameContainer = document.getElementById('game') as HTMLDivElement;
 const logoElement = document.getElementById('logo');
 const WORD_KEY = 'word';
 
 let triesLeft: number;
+let winCount: number;
 
 const createPlaceholdersHTML = (word: string): string => {
   return Array.from(word)
@@ -43,10 +50,14 @@ const checkLetter = (letter: string): void => {
       'hangman-img'
     ) as HTMLImageElement;
     if (hangmanImg) hangmanImg.src = `images/hg-${10 - triesLeft}.png`;
+
+    if (triesLeft === 0) stopGame(GameStatus.LOSE);
   } else {
     const wordArray = Array.from(word);
     wordArray.forEach((currentLetter, i) => {
       if (inputLetter === currentLetter) {
+        winCount += 1;
+        if (winCount === word.length) stopGame(GameStatus.WIN);
         const letter = document.getElementById(`letter_${i}`);
         if (letter) letter.innerText = inputLetter.toUpperCase();
       }
@@ -74,6 +85,7 @@ const createHangmanImg = (): HTMLImageElement => {
 
 export const startGame = (): void => {
   triesLeft = 10;
+  winCount = 0;
 
   logoElement?.classList.add('logo-sm');
 
@@ -91,4 +103,48 @@ export const startGame = (): void => {
 
   const hangmanImg = createHangmanImg();
   gameContainer.prepend(hangmanImg);
+
+  gameContainer.insertAdjacentHTML(
+    'beforeend',
+    '<button id="quit" class="button-secondary quit-button">Quit</button>'
+  );
+
+  const quitButton = document.getElementById('quit');
+  if (quitButton)
+    quitButton.onclick = () => {
+      const isSure = confirm(
+        'Are you sure you want to quit and lose progress?'
+      );
+      if (isSure) {
+        stopGame(GameStatus.QUIT);
+      }
+    };
+};
+
+const stopGame = (status: GameStatus) => {
+  document.getElementById('placeholders')?.remove();
+  document.getElementById('tries')?.remove();
+  document.getElementById('keyboard')?.remove();
+  document.getElementById('quit')?.remove();
+
+  const word = sessionStorage.getItem(WORD_KEY);
+  const hangmanImg = document.getElementById('hangman-img') as HTMLImageElement;
+
+  if (status === GameStatus.WIN) {
+    if (hangmanImg) hangmanImg.src = 'images/hg-win.png';
+    if (gameContainer)
+      gameContainer.innerHTML += '<h2 class="result_header win">You won!</h2>';
+  } else if (status === GameStatus.LOSE) {
+    if (gameContainer)
+      gameContainer.innerHTML +=
+        '<h2 class="result_header lose">You lost :(</h2>';
+  } else if (status === GameStatus.QUIT) {
+    logoElement?.classList.remove('logo-sm');
+    hangmanImg.remove();
+  }
+
+  gameContainer.innerHTML += `<p class='mt-5'>The word was: <span class='result-word'>${word?.toUpperCase()}</span></p><button id='play-again' class='button-primary button-again'>Play Again</button>`;
+
+  const againGameButton = document.getElementById('play-again');
+  if (againGameButton) againGameButton.onclick = startGame;
 };

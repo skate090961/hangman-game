@@ -33,7 +33,7 @@
     }
 
     #game {
-        @apply mt-10 flex flex-col items-center;
+        @apply max-w-full mt-10 flex flex-col items-center;
     }
 
     #tries {
@@ -54,6 +54,11 @@
         disabled:opacity-20 disabled:cursor-not-allowed;
     }
 
+    .button-secondary {
+        @apply border border-black rounded-md hover:bg-slate-100 dark:border-white dark:hover:bg-zinc-600
+        dark:active:bg-zinc-700 active:bg-slate-200;
+    }
+
     .toggle_container {
         @apply absolute top-6 right-6;
     }
@@ -67,11 +72,11 @@
     }
 
     .placeholders_container {
-        @apply flex flex-row;
+        @apply flex flex-row flex-wrap justify-center;
     }
 
     .letter {
-        @apply mx-2 text-5xl font-medium;
+        @apply text-2xl mx-2 md:text-5xl font-medium;
     }
 
     .keyboard {
@@ -88,5 +93,29 @@
 
     .logo-sm {
         @apply text-xl;
+    }
+
+    .button-again {
+        @apply px-5 py-2 mt-5
+    }
+
+    .result_header {
+        @apply text-2xl font-bold mt-4;
+    }
+
+    .result_header.win {
+        @apply text-lime-600;
+    }
+
+    .result_header.lose {
+        @apply text-red-600;
+    }
+
+    .result-word {
+        @apply font-bold;
+    }
+
+    .quit-button {
+        @apply px-2 py-1 mt-5;
     }
 }
