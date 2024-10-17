@@ -9,7 +9,7 @@ export const createHangmanImg = (): HTMLImageElement => {
   return image;
 };
 
-export const updateHangmanImage = (triesLeft: number): void => {
+export const updateHangmanImg = (triesLeft: number): void => {
   const hangmanImg = document.getElementById('hangman-img') as HTMLImageElement;
   if (hangmanImg) hangmanImg.src = `images/hg-${INITIAL_TRIES - triesLeft}.png`;
 };

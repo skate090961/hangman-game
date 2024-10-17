@@ -1,7 +1,7 @@
 import { INITIAL_TRIES, WORD_KEY, WORDS } from './consts.ts';
 import { createPlaceholdersSection } from './placeholders.ts';
 import { createKeyboard, handleKeyboardClick } from './keyboard.ts';
-import { createHangmanImg, updateHangmanImage } from './hangman.ts';
+import { createHangmanImg, updateHangmanImg } from './hangman.ts';
 
 enum GameStatus {
   WIN = 'win',
@@ -27,7 +27,7 @@ const checkLetter = (letter: string): void => {
   if (!word?.includes(inputLetter)) {
     triesLeft -= 1;
     updateTriesDisplay();
-    updateHangmanImage(triesLeft);
+    updateHangmanImg(triesLeft);
 
     if (triesLeft === 0) stopGame(GameStatus.LOSE);
   } else {
